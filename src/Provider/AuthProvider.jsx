@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'; // ES6
 import auth from "../Firebase/Firebase.Config";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider } from "firebase/auth";
 
 const Gprovider = new GoogleAuthProvider();
+const GitProvider = new GithubAuthProvider();
 
 export const AuthContext = createContext(null)
 const AuthProvider = ({ children }) => {
@@ -24,6 +26,10 @@ const AuthProvider = ({ children }) => {
         setLoader(true)
         return signInWithPopup(auth, Gprovider);
     }
+    const signWithGithub = () => {
+        setLoader(true)
+        return signInWithPopup(auth, GitProvider);
+    }
     const LogOut = () => {
         setLoader(true)
         signOut(auth);
@@ -40,7 +46,7 @@ const AuthProvider = ({ children }) => {
         }
 
     }, [])
-    const authInfo = { user, CreateUser, LoginUser, LogOut, loader, signWithGoogle }
+    const authInfo = { user, CreateUser, LoginUser, LogOut, loader, signWithGoogle ,signWithGithub}
     return (
         <AuthContext.Provider value={authInfo}>
             {children}

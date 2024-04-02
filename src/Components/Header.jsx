@@ -46,7 +46,7 @@ const Header = () => {
                 {
                     user ?
                         <>
-                            <p className="mr-5">{user.email}</p>
+                            <p className="mr-5">{user.displayName|| user.email}</p>
                             <a className="btn" onClick={handleLogOut}>Log out</a>
                         </>
                         :

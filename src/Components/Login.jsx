@@ -5,7 +5,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
 
-    const { LoginUser, signWithGoogle } = useContext(AuthContext)
+    const { LoginUser, signWithGoogle, signWithGithub } = useContext(AuthContext)
     const navigate = useNavigate()
     const handleLogin = e => {
         e.preventDefault()
@@ -27,6 +27,11 @@ const Login = () => {
     }
     const handleGoogle = () => {
         signWithGoogle()
+            .then(result => console.log(result.user))
+            .catch(error => console.log(error))
+    }
+    const handleTweeter = () => {
+        signWithGithub()
             .then(result => console.log(result.user))
             .catch(error => console.log(error))
     }
@@ -59,8 +64,16 @@ const Login = () => {
                                 <button className="btn btn-primary">Login</button>
                             </div>
                             <div>
-                                <p>New here ? Please<Link to="/signup"><button className="btn btn-link">Sign up</button></Link></p>
-                                <p><button onClick={handleGoogle}>Google</button></p>
+                                <p>New here ? Please
+                                    <Link to="/signup">
+                                        <button className="btn btn-link">Sign up</button>
+                                    </Link>
+                                </p>
+
+                                <div className="flex ">
+                                <p><button className="btn btn-link " onClick={handleGoogle}>Google</button></p>
+                                <p><button className="btn btn-link " onClick={handleTweeter}>Tweeter</button></p>
+                                </div>
                             </div>
                         </form>
 
