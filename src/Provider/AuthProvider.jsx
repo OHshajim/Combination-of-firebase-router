@@ -6,21 +6,26 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 export const AuthContext = createContext(null)
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
+    const [loader, setLoader] = useState(true)
 
     const CreateUser = (email, password) => {
+        setLoader(true)
         return createUserWithEmailAndPassword(auth, email, password);
     }
     const LoginUser = (email, password) => {
+        setLoader(true)
         return signInWithEmailAndPassword(auth, email, password);
     }
 
     const LogOut = () => {
+        setLoader(true)
         signOut(auth);
     }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             console.log("Current value of the current user", currentUser);
+            setLoader(false)
             setUser(currentUser)
         });
         return () => {
@@ -28,7 +33,7 @@ const AuthProvider = ({ children }) => {
         }
 
     }, [])
-    const authInfo = { user, CreateUser, LoginUser ,LogOut}
+    const authInfo = { user, CreateUser, LoginUser, LogOut ,loader}
     return (
         <AuthContext.Provider value={authInfo}>
             {children}
