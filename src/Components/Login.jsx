@@ -30,7 +30,7 @@ const Login = () => {
             .then(result => console.log(result.user))
             .catch(error => console.log(error))
     }
-    const handleTweeter = () => {
+    const handleGit = () => {
         signWithGithub()
             .then(result => console.log(result.user))
             .catch(error => console.log(error))
@@ -71,8 +71,8 @@ const Login = () => {
                                 </p>
 
                                 <div className="flex ">
-                                <p><button className="btn btn-link " onClick={handleGoogle}>Google</button></p>
-                                <p><button className="btn btn-link " onClick={handleTweeter}>Tweeter</button></p>
+                                    <p><button className="btn btn-link " onClick={handleGoogle}>Google</button></p>
+                                    <p><button className="btn btn-link " onClick={handleGit}>GitHub</button></p>
                                 </div>
                             </div>
                         </form>
